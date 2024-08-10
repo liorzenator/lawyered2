@@ -44,7 +44,7 @@ export const App = () => (
         list={ListGuesser}
         edit={EditGuesser}
         show={ShowGuesser}
-        options={{ label: "שיט אחר" }}
+        options={{ label: "סוגי שירות" }}
       />
       </Admin>
   </CacheProvider>
