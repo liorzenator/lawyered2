@@ -15,7 +15,8 @@
     "react": "^18.3.0",
     "react-admin": "^5.1.0",
     "react-dom": "^18.3.0",
-    "stylis-plugin-rtl": "^2.1.1"
+    "stylis-plugin-rtl": "^2.1.1",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@testing-library/react": "^15.0.7",
