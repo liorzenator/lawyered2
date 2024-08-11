@@ -12,6 +12,7 @@ import { defaultTheme } from 'react-admin';
 import createCache from '@emotion/cache';
 import rtlPlugin from 'stylis-plugin-rtl';
 import { CacheProvider } from '@emotion/react';
+import { PostCreate } from "./components/postCreate";
 
 const theme = {
   ...defaultTheme,
@@ -37,6 +38,7 @@ export const App = () => (
         list={ListGuesser}
         edit={EditGuesser}
         show={ShowGuesser}
+        create={PostCreate}
         options={{ label: "לקוחות" }}
       />
       <Resource
