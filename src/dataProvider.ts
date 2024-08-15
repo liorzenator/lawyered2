@@ -10,9 +10,22 @@ export const fakeDataProvider = fakeRestDataProvider(
 
 const ClientsDataProvider = {
   // Should implement the following methods:
-  // getList: (resource, params) => handle('getList', resource, params),
-  // getOne: (resource, params) => handle('getOne', resource, params),
-  // getMany: (resource, params) => handle('getMany', resource, params),
+   getList: (params) => 
+   {
+    console.log("getList", params);
+    var clients = JSON.parse(localStorage.getItem("data") ?? "[]").Clients;
+
+    return Promise.resolve({data: clients, total: clients.length});
+   },
+  getOne: (params) => {
+    console.log("getOne", params);
+    return Promise.resolve({data: data.Clients.find(client => client.id === params.id)});
+  },
+   getMany: (params) => 
+  {
+    console.log("getMany", params);
+    return Promise.resolve({data: data.Clients.filter(client => params.ids.includes(client.id))});
+  }, 
   // getManyReference: (resource, params) => handle('getManyReference', resource, params),
   // update: (resource, params) => handle('update', resource, params),
   // updateMany: (resource, params) => handle('updateMany', resource, params),
@@ -24,6 +37,7 @@ const ClientsDataProvider = {
     const newUser = {id: uuidv4(), ...params.data} // adding some random ID. This is not a good practice, but it's just an example
     // This updates the current data.json file but only in memory, on refresh it will be gone
     data.Clients.push(newUser);
+    localStorage.setItem("data", JSON.stringify(data));
     // TODO: Save the data to a file, send a request to server, etc.
     // fs.writeFileSync("./data.json", JSON.stringify(data, null, 2));
     return Promise.resolve({data: newUser});
@@ -44,6 +58,15 @@ const DataProviders = {
 const realDataProvider = {
   create: (resource, params) => {
     return DataProviders[resource].create(params);
-  }
+  },
+  getOne: (resource, params) => {
+    return DataProviders[resource].getOne(params);
+  },
+  getList: (resource, params) => {
+    return DataProviders[resource].getList(params);
+  },
+  getMany: (resource, params) => {
+    return DataProviders[resource].getMany(params);
+  },
 }
 export const dataProvider = {...fakeDataProvider, ...realDataProvider};

@@ -12,7 +12,9 @@ import { defaultTheme } from 'react-admin';
 import createCache from '@emotion/cache';
 import rtlPlugin from 'stylis-plugin-rtl';
 import { CacheProvider } from '@emotion/react';
-import { PostCreate } from "./components/postCreate";
+import { ClientCreate } from "./components/clientCreate";
+import { EditClient } from "./components/clientEdit";
+import { ClientList } from "./components/clientList";
 
 const theme = {
   ...defaultTheme,
@@ -35,10 +37,10 @@ export const App = () => (
     >
       <Resource
         name="Clients"
-        list={ListGuesser}
-        edit={EditGuesser}
+        list={ClientList}
+        edit={EditClient}
         show={ShowGuesser}
-        create={PostCreate}
+        create={ClientCreate}
         options={{ label: "לקוחות" }}
       />
       <Resource
